@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  app:
+    container_name: "oilking"
+    env_file: ".env"
+    build:
+        context: "./app"
+        dockerfile: "Dockerfile"
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./app:/go/src/oilking/app
+    restart: always
+  redis:
+    container_name: "oilking-redis"
+    env_file: ".env"
+    build:
+        context: "./redis"
+        dockerfile: "Dockerfile"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/var/lib/redis
+    depends_on:
+      - app

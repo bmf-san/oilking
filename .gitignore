@@ -1,0 +1,5 @@
+.env
+oilking
+!app/log/.gitkeep
+/redis/data
+!/redis/data/.gitkeep
