@@ -1,0 +1,5 @@
+github.com/bmf-san/bitbank v0.0.0-20170606020034-62fd0a061cf5 h1:QTAlgkcHckLe9INZiLZzIniFZRF42Dd9mE+kd4dq1Jc=
+github.com/bmf-san/bitbankgo v0.0.0-20200818133958-588aa295e6e3 h1:WE/Jgg0AJyaU9yt4cfhWnfHNvpf0yFvDBZGQgv87xYA=
+github.com/bmf-san/bitbankgo v0.0.0-20200818133958-588aa295e6e3/go.mod h1:QlN7jS+NG5OFredBgmYCEhYbgjJLfH79UqM4WH/wwqM=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
