@@ -1,0 +1,24 @@
+# circleci does not support version 3.3 ~
+version: "3.2"
+services:
+  app:
+    container_name: "oilking"
+    env_file: ".env"
+    build:
+        context: "./app"
+        dockerfile: "Dockerfile"
+    ports:
+      - "8083:8083"
+    restart: always
+  redis:
+    container_name: "oilking-redis"
+    env_file: ".env"
+    build:
+        context: "./redis"
+        dockerfile: "Dockerfile"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/var/lib/redis
+    depends_on:
+      - app
