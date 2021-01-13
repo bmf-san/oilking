@@ -83,7 +83,9 @@ We welcome your issue or pull request from everyone.
 
 We'd appreciate if you could contribute our project.
 
-Any feature request or request is OK. :D
+Any request or question is OK.
+
+日本語でも大丈夫です :D
 
 # License
 This project is licensed under the terms of the MIT license.

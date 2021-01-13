@@ -130,6 +130,7 @@ func (t *Trade) sell(p float64) {
 	}
 }
 
+// hasPositions determines if there are positions.
 func (t *Trade) hasPositions() bool {
 	pp := &model.PositionParams{
 		ProductCode: targetProductCode,
@@ -144,6 +145,7 @@ func (t *Trade) hasPositions() bool {
 	return len(pr) > 0
 }
 
+// hasOrders determines if there are orders.
 func (t *Trade) hasOrders() bool {
 	op := &model.ChildOrderParams{
 		ProductCode:     targetProductCode,
@@ -160,6 +162,7 @@ func (t *Trade) hasOrders() bool {
 	return len(or) > 0
 }
 
+// getPosition gets a position.
 func (t *Trade) getPosition() *model.PositionResponse {
 	pp := &model.PositionParams{
 		ProductCode: targetProductCode,
