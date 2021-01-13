@@ -33,6 +33,7 @@ const (
 // Client is a client.
 type Client struct {
 	httpclient *http.Client
+	wsConn     *websocket.Conn
 	apikey     string
 	apisecret  string
 	Logger     *logger.Logger
@@ -119,8 +120,8 @@ func (c *Client) Do(method string, apipath string, query map[string]string, data
 	return rbody, nil
 }
 
-// DoWs sends an websocket request and returns an websocket response.
-func (c *Client) DoWs(w *model.Writer) {
+// connWs gets websocket connection.
+func (c *Client) connWs(w *model.Writer) {
 	u := url.URL{Scheme: realtimeAPIScheme, Host: realtimeAPIHost, Path: realtimeAPIPath}
 	p := u.String()
 
@@ -130,7 +131,7 @@ func (c *Client) DoWs(w *model.Writer) {
 			Message: err.Error(),
 		})
 	}
-	defer conn.Close()
+	c.wsConn = conn
 
 	j := &model.JSONRPC2{
 		Version: jsonRPCVersion,
@@ -148,20 +149,29 @@ func (c *Client) DoWs(w *model.Writer) {
 	}
 
 	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
+}
 
+// DoWs sends an websocket request and returns an websocket response.
+func (c *Client) DoWs(w *model.Writer) {
 LOOP:
 	for {
+		if c.wsConn == nil {
+			c.connWs(w)
+		}
+
 		j := new(model.JSONRPC2)
 
-		// FIXME: Something broken pipe errorr has happen.
-		if err := conn.ReadJSON(j); err != nil {
+		c.wsConn.SetWriteDeadline(time.Now().Add(10 * time.Second))
+
+		if err := c.wsConn.ReadJSON(j); err != nil {
 			c.Logger.Error(logger.Entry{
 				Message: "read:" + err.Error(),
 			})
-			return
-		}
 
-		conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
+			c.wsConn.Close()
+			c.wsConn = nil
+			continue LOOP
+		}
 
 		if j.Method == "channelMessage" {
 			switch v := j.Params.(type) {
