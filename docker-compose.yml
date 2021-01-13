@@ -1,4 +1,5 @@
-version: "3.8"
+# circleci does not support version 3.3 ~
+version: "3.2"
 services:
   app:
     container_name: "oilking"
@@ -8,8 +9,6 @@ services:
         dockerfile: "Dockerfile"
     ports:
       - "8083:8083"
-    volumes:
-      - ./app:/go/src/oilking/app
     restart: always
   redis:
     container_name: "oilking-redis"

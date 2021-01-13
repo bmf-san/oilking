@@ -10,11 +10,11 @@ Copy an `.env.example` as a `.env` and edit it.
 
 ## Build
 Build the source code.
-`make build`
+`make docker-compose-build`
 
 ## Run
 Run the binary file.
-`make up` or `make up-d`
+`make docker-compose-up` or `make docker-compose-up-d`
 
 # Supporting API
 ## HTTP API

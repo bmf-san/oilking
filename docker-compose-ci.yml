@@ -1,0 +1,10 @@
+# circleci does not support version 3.3 ~
+version: "3.2"
+services:
+  app:
+    container_name: "oilking"
+    build:
+        context: "./app"
+        dockerfile: "Dockerfile.ci"
+    ports:
+      - "8083:8083"
