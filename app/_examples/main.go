@@ -13,16 +13,7 @@ import (
 
 // Example codes for api client.
 func main() {
-	// TODO: Replace with test code later.
 	l := logger.NewLogger(logger.LevelInfo, time.FixedZone("Asia/Tokyo", 9*60*60))
-	f, err := l.SetOutput()
-	if err != nil {
-		l.Error(logger.Entry{
-			Message: err.Error(),
-		})
-		os.Exit(1)
-	}
-	defer f.Close()
 	ak := os.Getenv("BITFLYER_API_KEY")
 	as := os.Getenv("BITFLYER_API_SECRET")
 	c := api.NewClient(ak, as, l)
