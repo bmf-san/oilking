@@ -4,7 +4,14 @@
 
 A trading bot using bitflyer api.
 
-If you use the code, please take responsibility at your own risk. We do not take any responsibility even if you suffer a loss.
+This repository is a template repository, so if you use it, we recommend using it as a template repository.
+
+cf. [docs.github.com - creating-a-repository-from-a-template](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)
+
+# Disclaimer
+Please take responsibility at your own risk if you use this program. 
+
+We do not take any responsibility even if you suffer a loss.
 
 # Get started
 ## Set enviroment variables
@@ -19,7 +26,12 @@ Build the source code.
 Run the binary file.
 `make docker-compose-up` or `make docker-compose-up-d`
 
-# Supporting API
+# Exchange marketplaces supported
+|      Support       | Exchange markeplaces |
+| ------------------ | -------------------- |
+| :white_check_mark: | Bitflyer             |
+
+# API supported
 ## HTTP API
 ### HTTP Public API
 |      Support       | Method |     Endpoint      |

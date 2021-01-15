@@ -17,9 +17,6 @@ const (
 	LevelError
 	// LevelFatal is an abend error.
 	LevelFatal
-)
-
-const (
 	// LevelTextInfo is the text for info.
 	LevelTextInfo = "info"
 	// LevelTextWarn is the text for warn.
@@ -28,6 +25,24 @@ const (
 	LevelTextError = "error"
 	// LevelTextFatal is the text for fatal.
 	LevelTextFatal = "fatal"
+	// LabelBalance is a label for balance.
+	LabelBalance = "[Balance]"
+	// LabelBalanceHistory is a label for balance history.
+	LabelBalanceHistory = "[Balance History]"
+	// LabelChat is a label for chat.
+	LabelChat = "[Chat]"
+	// LabelChildOrder is a label for child order.
+	LabelChildOrder = "[ChildOrder]"
+	// LabelCollateral is a label for collateral.
+	LabelCollateral = "[Collateral]"
+	// LabelExecution is a label for execution.
+	LabelExecution = "[Execution]"
+	// LabelPosition is a label for position.
+	LabelPosition = "[Position]"
+	// LabelTicker is a label for Ticker.
+	LabelTicker = "[Ticker]"
+	// LabelTradingCommission is a label for trading commission.
+	LabelTradingCommission = "[Trading Commission]"
 )
 
 var levelText = map[int]string{
@@ -73,8 +88,8 @@ type AccessLogEntry struct {
 type TradingLogEntry struct {
 	Level  string    `json:"level"`
 	Time   time.Time `json:"time"` // UTC
+	Label  string    `json:"label"`
 	Action string    `json:"action"`
-	Result string    `json:"result"`
 }
 
 // NewLogger creates a logger.
@@ -116,7 +131,6 @@ func (l *Logger) Fatal(entry interface{}) {
 
 // OutputJSON outputs logs.
 func (l *Logger) OutputJSON(level string, entry interface{}) error {
-	// HACK: I think it's better to handle errors.
 	switch reflect.TypeOf(entry).Name() {
 	case "Entry":
 		if e, ok := entry.(Entry); ok {

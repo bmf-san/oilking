@@ -10,40 +10,26 @@ import (
 	"github.com/bmf-san/oilking/app/logger"
 	"github.com/bmf-san/oilking/app/model"
 	"github.com/bmf-san/oilking/app/types"
-	"github.com/go-redis/redis/v7"
 )
 
 const (
-	// NOTE: These values ​​can be parameterized later.
 	// targetProductCode is a types for trading.
 	targetProductCode = types.ProductCodeFXBTCJPY
 	// targetSize is a size for buy or sell.
 	targetSize = 0.01
-
-	// TODO: Will be defined later in the logger.
-	// NOTE: These values user for logging. It ​​may be used when implementing reporting services.
-	// NOTE: It seems better to prepare the action name as well. ex. [ACTION]
-	// labelPosition is a label for position.
-	labelPosition = "[Position]"
-	// labelOrder is a label for order.
-	labelOrder = "[Order]"
-	// labelCollateral is a label for collateral.
-	labelCollateral = "[Collateral]"
 )
 
 // Trade is a trade.
 type Trade struct {
 	apiClient *api.Client
 	logger    *logger.Logger
-	dbClient  *redis.Client
 }
 
 // NewTrade creates a new trade.
-func NewTrade(c *api.Client, l *logger.Logger, db *redis.Client) *Trade {
+func NewTrade(c *api.Client, l *logger.Logger) *Trade {
 	return &Trade{
 		apiClient: c,
 		logger:    l,
-		dbClient:  db,
 	}
 }
 
@@ -101,8 +87,9 @@ func (t *Trade) buy(p float64) {
 			Message: err.Error(),
 		})
 	} else {
-		t.logger.Info(logger.Entry{
-			Message: fmt.Sprintf("%s send a child order", labelOrder),
+		t.logger.Info(logger.TradingLogEntry{
+			Label:  logger.LabelChildOrder,
+			Action: "send a child order",
 		})
 	}
 }
@@ -124,8 +111,9 @@ func (t *Trade) sell(p float64) {
 			Message: err.Error(),
 		})
 	} else {
-		t.logger.Info(logger.Entry{
-			Message: fmt.Sprintf("%s send a child order", labelOrder),
+		t.logger.Info(logger.TradingLogEntry{
+			Label:  logger.LabelChildOrder,
+			Action: "send a child order",
 		})
 	}
 }
@@ -195,12 +183,13 @@ func (t *Trade) StopSafety() {
 			Message: err.Error(),
 		})
 	} else {
-		t.logger.Info(logger.Entry{
-			Message: fmt.Sprintf("%s All orders have been cancelled.", labelOrder),
+		t.logger.Info(logger.TradingLogEntry{
+			Label:  logger.LabelChildOrder,
+			Action: "all orders have been cancelled",
 		})
 	}
 
-	// I want to close the position by counter-trading, but for the time being I will make an error instead of an alert.
+	// Check the remaining open interest
 	pp := &model.PositionParams{
 		ProductCode: targetProductCode,
 	}
@@ -210,8 +199,13 @@ func (t *Trade) StopSafety() {
 			Message: err.Error(),
 		})
 	} else {
-		t.logger.Info(logger.Entry{
-			Message: fmt.Sprintf("%s %d positions", labelPosition, len(pr)),
+		msg := "no positions"
+		if len(pr) > 0 {
+			msg = fmt.Sprintf("get %d positions", len(pr))
+		}
+		t.logger.Info(logger.TradingLogEntry{
+			Label:  logger.LabelPosition,
+			Action: msg,
 		})
 	}
 }
