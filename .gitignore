@@ -1,5 +1,5 @@
 .env
 oilking
-!app/log/.gitkeep
+app/logic
 /redis/data
 !/redis/data/.gitkeep
