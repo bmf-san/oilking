@@ -25,8 +25,8 @@ type PositionParams struct {
 }
 
 // MakePositionParams makes an positionsparams.
-func (ep *PositionParams) MakePositionParams() map[string]string {
+func (pp *PositionParams) MakePositionParams() map[string]string {
 	return map[string]string{
-		"product_code": string(ep.ProductCode),
+		"product_code": string(pp.ProductCode),
 	}
 }

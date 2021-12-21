@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/bmf-san/oilking/app/api"
+	"github.com/bmf-san/oilking/app/bitflyer"
 	"github.com/bmf-san/oilking/app/logger"
 	"github.com/bmf-san/oilking/app/model"
 	"github.com/bmf-san/oilking/app/types"

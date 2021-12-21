@@ -3,7 +3,12 @@ version: "3.2"
 services:
   app:
     container_name: "oilking"
-    env_file: ".env"
+    environment:
+      - BITFLYER_API_KEY
+      - BITFLYER_API_SECRET
+      - REDIS_HOST
+      - REDIS_PORT
+      - REDIS_PASSWORD
     build:
         context: "./app"
         dockerfile: "Dockerfile"

@@ -1,6 +1,6 @@
 module github.com/bmf-san/oilking/app
 
-go 1.15
+go 1.17
 
 require (
 	github.com/go-redis/redis/v7 v7.4.0

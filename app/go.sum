@@ -1,3 +1,4 @@
+github.com/bmf-san/oilking v0.0.0-20210115163828-2ea944f41431 h1:bshXK9cJbeiogrz/t/J3tGDgKQI724PWb1Zfiazqcjc=
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/go-redis/redis/v7 v7.4.0 h1:7obg6wUoj05T0EpY0o8B59S9w5yeMWql7sw2kwNW1x4=

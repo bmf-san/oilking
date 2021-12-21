@@ -4,8 +4,6 @@
 
 A trading bot using bitflyer api.
 
-This repository is a template repository, so if you use it, we recommend using it as a template repository.
-
 cf. [docs.github.com - creating-a-repository-from-a-template](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)
 
 # Disclaimer

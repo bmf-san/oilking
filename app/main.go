@@ -6,7 +6,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/bmf-san/oilking/app/api"
+	"github.com/bmf-san/oilking/app/bitflyer"
 	"github.com/bmf-san/oilking/app/logger"
 	"github.com/bmf-san/oilking/app/model"
 	"github.com/bmf-san/oilking/app/trade"
@@ -17,8 +17,8 @@ func main() {
 	l := logger.NewLogger(logger.LevelInfo, time.FixedZone("Asia/Tokyo", 9*60*60))
 	ak := os.Getenv("BITFLYER_API_KEY")
 	as := os.Getenv("BITFLYER_API_SECRET")
-	c := api.NewClient(ak, as, l)
-	t := trade.NewTrade(c, l)
+	c := bitflyer.NewClient(ak, as, l)
+	t := trade.NewTrader(c, l)
 	ch := make(chan model.TickerResponse)
 	w := &model.Writer{
 		Channel:       types.ChannelTickerFXBTCJPY,

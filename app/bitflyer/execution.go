@@ -1,4 +1,4 @@
-package api
+package bitflyer
 
 import (
 	"encoding/json"
